@@ -22,6 +22,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-// Add this line to map controller endpoints
+// map controller endpoints
 app.MapControllers();
 app.Run();

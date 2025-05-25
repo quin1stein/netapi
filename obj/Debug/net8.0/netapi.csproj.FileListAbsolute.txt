@@ -167,3 +167,4 @@ C:\academ\netapi\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Runtime.Caching
 C:\academ\netapi\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 C:\academ\netapi\bin\Debug\net8.0\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
 C:\academ\netapi\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
+C:\academ\netapi\obj\Debug\net8.0\netapi.sourcelink.json
