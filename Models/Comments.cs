@@ -7,17 +7,17 @@ namespace CommentSchema.Models
     public class Comment
     {
         [Key]
-        public string Id { get; set; } = string.Empty!;
+        public Guid Id { get; set; } = Guid.NewGuid();
         [Required]
         [MinLength(1)]
         public string Content { get; set; } = string.Empty.ToString();
         [Required]
         public DateTime CommentedAt { get; set; } = DateTime.Now;
         [Required]
-        public string UserId { get; set; } = string.Empty!;
+        public Guid UserId { get; set; }
         public User User { get; set; } = null!;
         [Required]
-        public string PostId { get; set; } = string.Empty!;
+        public Guid PostId { get; set; }
         public Post Post { get; set; } = null!;
 
     }
