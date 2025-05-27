@@ -14,6 +14,17 @@ namespace NetApi.Data
         {
             base.OnModelCreating(modelBuilder);
 
+
+            modelBuilder.Entity<User>()
+            .HasData(
+                new User
+                {
+                    Id = Guid.Parse("d2b1b5c3-cc47-4f64-bb9b-f3b4b32f9eaf"),
+                    Name = "Test User",
+                    Password = "testpassword"
+                }
+            );
+
             // User -> Post
             modelBuilder.Entity<User>()
             .HasMany(u => u.Posts)
@@ -35,6 +46,12 @@ namespace NetApi.Data
             .HasForeignKey(c => c.PostId)
             .OnDelete(DeleteBehavior.Cascade);
 
+            // CommentedAt set default configs
+            modelBuilder.Entity<Comment>(entity =>
+            {
+                entity.Property(c => c.CommentedAt)
+                .HasDefaultValueSql("GETUTCDATE()");
+            });
         }
     }
 }
