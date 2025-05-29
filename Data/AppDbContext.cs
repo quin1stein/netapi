@@ -46,6 +46,11 @@ namespace NetApi.Data
             .HasForeignKey(c => c.PostId)
             .OnDelete(DeleteBehavior.Cascade);
 
+            modelBuilder.Entity<Post>(entity =>
+            {
+                entity.HasIndex(p => p.Slug)
+                .IsUnique();
+            });
             // CommentedAt set default configs
             modelBuilder.Entity<Comment>(entity =>
             {

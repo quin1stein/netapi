@@ -31,7 +31,8 @@ namespace netapi.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Slug = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -50,7 +51,7 @@ namespace netapi.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CommentedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CommentedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETUTCDATE()"),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     PostId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
@@ -71,6 +72,11 @@ namespace netapi.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.InsertData(
+                table: "User",
+                columns: new[] { "Id", "Name", "Password" },
+                values: new object[] { new Guid("d2b1b5c3-cc47-4f64-bb9b-f3b4b32f9eaf"), "Test User", "testpassword" });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Comment_PostId",
                 table: "Comment",
@@ -80,6 +86,12 @@ namespace netapi.Migrations
                 name: "IX_Comment_UserId",
                 table: "Comment",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Post_Slug",
+                table: "Post",
+                column: "Slug",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Post_UserId",

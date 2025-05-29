@@ -29,7 +29,9 @@ namespace netapi.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CommentedAt")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETUTCDATE()");
 
                     b.Property<string>("Content")
                         .IsRequired()
@@ -60,6 +62,10 @@ namespace netapi.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Slug")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -68,6 +74,9 @@ namespace netapi.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Slug")
+                        .IsUnique();
 
                     b.HasIndex("UserId");
 
@@ -92,6 +101,14 @@ namespace netapi.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("User");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("d2b1b5c3-cc47-4f64-bb9b-f3b4b32f9eaf"),
+                            Name = "Test User",
+                            Password = "testpassword"
+                        });
                 });
 
             modelBuilder.Entity("CommentSchema.Models.Comment", b =>
